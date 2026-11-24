@@ -1,0 +1,4 @@
+../libs/imu_orientation/imu_orientation.c:16:19:multiply	40	static
+../libs/imu_orientation/imu_orientation.c:26:13:normalize_quaternion	32	static
+../libs/imu_orientation/imu_orientation.c:37:6:IMU_OrientationBegin	40	static
+../libs/imu_orientation/imu_orientation.c:68:6:IMU_OrientationUpdate	152	static

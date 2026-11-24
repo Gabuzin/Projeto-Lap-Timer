@@ -1,0 +1,28 @@
+{
+  "files": [
+    "actions.h",
+    "fonts.h",
+    "images.c",
+    "images.h",
+    "images/ui_image_bateria_1.c",
+    "images/ui_image_bateria_2.c",
+    "images/ui_image_bateria_3.c",
+    "images/ui_image_bateria_4.c",
+    "images/ui_image_bateria_5.c",
+    "images/ui_image_bateria_6.c",
+    "images/ui_image_bateria_carregando.c",
+    "images/ui_image_bateria_cheia.c",
+    "images/ui_image_bateria_vazia.c",
+    "images/ui_image_config.c",
+    "images/ui_image_home.c",
+    "images/ui_image_satelite.c",
+    "screens.c",
+    "screens.h",
+    "structs.h",
+    "styles.c",
+    "styles.h",
+    "ui.c",
+    "ui.h",
+    "vars.h"
+  ]
+}
