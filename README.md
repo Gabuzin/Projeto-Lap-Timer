@@ -149,8 +149,6 @@ O projeto não deve ser considerado um sistema de cronometragem homologado para 
 
 - Desenvolver uma PCB dedicada para organizar as conexões elétricas.
 - Melhorar a confiabilidade do hardware.
-- Realizar testes integrados do sistema.
-- Executar testes em pista.
 - Comparar os tempos e dados coletados com um equipamento de referência validado.
 
 ## 👨‍💻 Autores
