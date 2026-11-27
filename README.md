@@ -145,8 +145,7 @@ O projeto não deve ser considerado um sistema de cronometragem homologado para 
 
 ## 🔮 Próximos passos
 
-- Desenvolver uma PCB dedicada para organizar as conexões elétricas.
-- Melhorar a confiabilidade do hardware.
+- Desenvolver uma PCB dedicada para organizar as conexões elétricas e melhorar a confiabilidade do hardware.
 - Comparar os tempos e dados coletados com um equipamento de referência validado.
 
 ## 👨‍💻 Autores
