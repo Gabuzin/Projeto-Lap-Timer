@@ -153,10 +153,6 @@ O projeto não deve ser considerado um sistema de cronometragem homologado para 
 - André Jorge Othon Teixeira
 - Gabriel Victorio Ditomaso
 
-## 🔗 Repositório
-
-[GitHub – RaceMetrics / Projeto Lap Timer](https://github.com/Gabuzin/Projeto-Lap-Timer)
-
 ---
 
 **RaceMetrics** – Aquisição de dados, cronometragem e análise de desempenho em circuitos fechados.
