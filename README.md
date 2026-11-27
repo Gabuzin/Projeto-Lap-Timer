@@ -134,8 +134,6 @@ As dependências devem estar declaradas no arquivo `dashboard/requirements.txt`.
 
 ## ⚠️ Estado atual e limitações
 
-O projeto possui a estrutura principal de aquisição, processamento, interface e análise externa em desenvolvimento.
-
 Algumas etapas ainda necessitam de validação integrada e em pista. Entre as limitações atuais estão:
 
 - A precisão depende da cobertura e da qualidade do sinal GNSS.
