@@ -23,7 +23,7 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
- C:/Users/Gabriel\ D/Documents/GitHub/Lap-Timer/STM/libs/ICM20948/ICM_20948.h \
+ C:/Users/Gabriel\ D/Documents/GitHub/Projeto-Lap-Timer/STM32/libs/ICM20948/ICM_20948.h \
  ../libs/imu_orientation/imu_orientation.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
@@ -50,5 +50,5 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:
-C:/Users/Gabriel\ D/Documents/GitHub/Lap-Timer/STM/libs/ICM20948/ICM_20948.h:
+C:/Users/Gabriel\ D/Documents/GitHub/Projeto-Lap-Timer/STM32/libs/ICM20948/ICM_20948.h:
 ../libs/imu_orientation/imu_orientation.h:

@@ -356,6 +356,7 @@ int main(void)
   MX_I2C2_Init();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
+  HAL_Delay(1000);
 
   // Configuracao da ICM-20948
   icm.i2c = &hi2c1;

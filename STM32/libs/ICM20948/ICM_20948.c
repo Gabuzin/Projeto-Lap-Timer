@@ -215,50 +215,124 @@ ICM20948_e ICM20948_Calibrate(ICM20948_t *handle, int count, uint32_t intervalMS
 ICM20948_e ICM20948_Init(ICM20948_t *handle)
 {
     ICM20948_e status;
-    ICM20948_Accel_Config_t accel_config;
-    ICM20948_Gyro_Config_t gyro_config;
+    ICM20948_Accel_Config_t accel_config = {0};
+    ICM20948_Gyro_Config_t gyro_config = {0};
+
+    uint8_t acc_read = 0;
+    uint8_t gyro_read = 0;
 
     if (handle == NULL || handle->i2c == NULL)
         return ICM20948_I2C_NOT_FOUND;
 
-    if (handle->address != 0x68 && handle->address != 0x69)
+    if (handle->address != 0x68 &&
+        handle->address != 0x69)
         return ICM20948_INVALID_ADDRESS;
 
+    // Verifica identificacao
     status = ICM20948_Who_Am_I(handle);
+
     if (status != ICM20948_OK)
         return status;
 
+    // Acorda a IMU ANTES de configurar
+    status = ICM20948_Set_Sleep(handle, false);
+
+    if (status != ICM20948_OK)
+        return status;
+
+    HAL_Delay(100);
+
+    // Desativa low power e seleciona clock automatico
+    status = ICM20948_Reg_Write(
+        handle, B0_PWR_MGMT_1, 0x01
+    );
+
+    if (status != ICM20948_OK)
+        return status;
+
+    // Habilita todos os eixos
+    status = ICM20948_Reg_Write(
+        handle, B0_PWR_MGMT_2, 0x00
+    );
+
+    if (status != ICM20948_OK)
+        return status;
+
+    HAL_Delay(100);
+
+    // Configuracao do acelerometro
     accel_config.accel_dlpf = ACEL_DLPF_24HZ;
     accel_config.accel_scale = ACCEL_16G;
     accel_config.accel_dlpf_enable = true;
     accel_config.accel_sample_rate_div = 4;
 
-    status = ICM20948_Set_Acel_CONFIG(handle, accel_config);
-    if (status != ICM20948_OK)
-        return status;
-    handle->AcelConfig = accel_config;
+    // Configuracao do giroscopio
+    gyro_config.gyro_dlpf_enable = true;
+    gyro_config.gyro_dlpf = GYRO_DLPF_24HZ;
+    gyro_config.gyro_scale = GYRO_2000DPS;
+    gyro_config.gyro_sample_rate_div = 4;
 
-    gyro_config.gyro_dlpf_enable =true;
-    gyro_config.gyro_dlpf= GYRO_DLPF_24HZ;
-    gyro_config.gyro_scale= GYRO_2000DPS;
-    gyro_config.gyro_sample_rate_div= 4;
-
-    status = ICM20948_Set_Gyro_CONFIG(handle, gyro_config);
-    if (status != ICM20948_OK)
-        return status;
-    handle->GyroConfig = gyro_config;
-
-
-    status = ICM20948_Set_Sleep(handle, false);
-
-    if (status != ICM20948_OK)
+    // Tenta configurar e verificar os registradores
+    for (uint8_t tentativa = 0; tentativa < 5; tentativa++)
     {
-        return status;
+        status = ICM20948_Set_Acel_CONFIG(
+            handle, accel_config
+        );
+
+        if (status != ICM20948_OK)
+            goto retry;
+
+        status = ICM20948_Set_Gyro_CONFIG(
+            handle, gyro_config
+        );
+
+        if (status != ICM20948_OK)
+            goto retry;
+
+        HAL_Delay(50);
+
+        status = ICM20948_SelectBank(handle, BANK_2);
+
+        if (status != ICM20948_OK)
+            goto retry;
+
+        status = ICM20948_Reg_Read(
+            handle, B2_ACCEL_CONFIG, &acc_read, 1
+        );
+
+        if (status != ICM20948_OK)
+            goto retry;
+
+        status = ICM20948_Reg_Read(
+            handle, B2_GYRO_CONFIG, &gyro_read, 1
+        );
+
+        if (status != ICM20948_OK)
+            goto retry;
+
+        // Confirma que as escalas foram aplicadas
+        if ((acc_read & 0x3F) == 0x27 &&
+            (gyro_read & 0x3F) == 0x27)
+        {
+            status = ICM20948_SelectBank(
+                handle, BANK_0
+            );
+
+            HAL_Delay(100);
+
+            return status;
+        }
+
+retry:
+
+        HAL_Delay(200);
     }
 
-    return ICM20948_SelectBank(handle, BANK_0);
+    ICM20948_SelectBank(handle, BANK_0);
 
+    return ICM20948_FAIL;
 }
+
 
 static int16_t ICM20948_ConvertRaw(uint8_t msb, uint8_t lsb)
 {
